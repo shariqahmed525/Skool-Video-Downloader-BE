@@ -4,7 +4,8 @@ import path from 'path';
 import os from 'os';
 import fs from 'fs';
 import { spawn } from 'child_process';
-import ffmpegPath from 'ffmpeg-static';
+import ffmpegInstaller from '@ffmpeg-installer/ffmpeg';
+const ffmpegPath = ffmpegInstaller.path;
 
 const app = express();
 app.use(cors());
