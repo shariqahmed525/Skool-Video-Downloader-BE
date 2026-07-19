@@ -1,0 +1,15 @@
+{
+  "name": "skool-video-downloader-backend",
+  "version": "1.0.0",
+  "description": "Backend API to download and merge HLS streams",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "ffmpeg-static": "^5.2.0"
+  }
+}
