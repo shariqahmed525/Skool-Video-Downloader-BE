@@ -103,11 +103,19 @@ function mergeWithFFmpeg(videoUrl, audioUrl, outputPath) {
 
     const ffmpegProcess = spawn(ffmpegPath, ffmpegArgs);
 
-    ffmpegProcess.on('close', (code) => {
+    let stderrLog = '';
+    ffmpegProcess.stderr.on('data', (data) => {
+      stderrLog += data.toString();
+      if (stderrLog.length > 3000) {
+        stderrLog = stderrLog.substring(stderrLog.length - 3000);
+      }
+    });
+
+    ffmpegProcess.on('close', (code, signal) => {
       if (code === 0) {
         resolve();
       } else {
-        reject(new Error(`FFmpeg exited with code ${code}`));
+        reject(new Error(`FFmpeg exited with code ${code}, signal ${signal}.\nLast Log:\n${stderrLog}`));
       }
     });
 
